@@ -12,5 +12,4 @@
 	      
 		> examples/article_html_demo.py
  - 安装使用
- > pip install -U dpnewspaper  -i http://nexus.daypop.net/repository/mypypi-hosted/simple --trusted-host nexus.daypop.net
-
+ > pip install git+https://github.com/Lousm/mynewspaper.git
