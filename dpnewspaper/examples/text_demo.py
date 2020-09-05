@@ -1,0 +1,63 @@
+#!/usr/bin/env python
+#-*- encoding: utf-8 -*-
+#
+# Copyright (c) 2020 daypop.ai, Inc. All Rights Reserved
+#
+# Version : 1.0
+# Author  : luoyingbo@daypop.ai
+# Time    : 2020/5/13 08:38
+# Desc    :   
+
+import codecs
+import requests
+
+from dpnewspaper.dparticle import (
+    DPArticle
+)
+from newspaper.article import (
+    Article as Origin_Article
+)
+
+headers = {
+    'pragma': 'no-cache',
+    'cache-control': 'no-cache',
+    'accept': '*/*',
+    'dnt': '1',
+    'x-requested-with': 'XMLHttpRequest',
+    'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36',
+    'sec-fetch-site': 'same-origin',
+    'sec-fetch-mode': 'cors',
+    'accept-encoding': 'gzip, deflate, br',
+    'accept-language': 'zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7'
+}
+
+proxies = {
+    "http": "http://0.0.0.0:1087",
+    "https": "http://0.0.0.0:1087"
+}
+
+url = "https://www.dailymail.co.uk/sciencetech/article-6964451/Is-fitness-tracker-LYING-you.html"
+
+html = requests.get(url, headers=headers, proxies=proxies).content
+
+news1 = DPArticle(url, language="en")
+news1.set_html(html)
+news1.parse()
+print(news1.all_text)
+
+print("#################### 分割线 ########################")
+news2 = Origin_Article(url, language="en")
+news2.set_html(html)
+news2.parse()
+print(news2.text)
+
+
+
+
+
+
+
+
+
+
+
