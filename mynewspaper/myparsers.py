@@ -15,7 +15,7 @@ from newspaper.parsers import (
 )
 
 
-class DPParse(Parser):
+class MYParse(Parser):
 
     @classmethod
     def clean_article_html(cls, node):

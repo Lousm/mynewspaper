@@ -12,8 +12,8 @@
 import codecs
 import requests
 
-from dpnewspaper.dparticle import (
-    DPArticle
+from mynewspaper.myarticle import (
+    MYArticle
 )
 from newspaper.article import (
     Article as Origin_Article
@@ -41,7 +41,7 @@ url = "https://www.dailymail.co.uk/sciencetech/article-6964451/Is-fitness-tracke
 
 html = requests.get(url, headers=headers, proxies=proxies).content
 
-news1 = DPArticle(url, language="en")
+news1 = MYArticle(url, language="en")
 news1.set_html(html)
 news1.parse()
 codecs.open("new_demo.html", mode="w").write(news1.all_article_html)

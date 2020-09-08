@@ -14,9 +14,9 @@ from newspaper.extractors import (
 )
 
 
-class DPContentExtractor(ContentExtractor):
+class MYContentExtractor(ContentExtractor):
     def __init__(self, config):
-        super(DPContentExtractor, self).__init__(config)
+        super(MYContentExtractor, self).__init__(config)
         pass
 
     @classmethod

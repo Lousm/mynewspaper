@@ -31,7 +31,7 @@ if sys.argv[-1] == 'publish':
 
 
 packages = [
-    'dpnewspaper',
+    'mynewspaper',
 ]
 
 
@@ -40,12 +40,12 @@ with open('requirements.txt') as f:
 
 
 setup(
-    name='dpnewspaper',
+    name='mynewspaper',
     version='0.25.6',
     description='Customized version from newspaper',
-    author='luoyingbo',
-    author_email='yingbo@daypop.ai',
-    url='http://git.daypop.net/luoyingbo/dpnewspaper',
+    author='loushimin',
+    author_email='mr_lousm@163.com',
+    url='https://github.com/Lousm/mynewspaper',
     packages=packages,
     include_package_data=True,
     install_requires=required,

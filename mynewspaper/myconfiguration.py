@@ -12,16 +12,16 @@ from newspaper.configuration import (
     Configuration
 )
 
-from .dpparsers import (
-    DPParse
+from .myparsers import (
+    MYParse
 )
 
 
-class DPConfiguration(Configuration):
+class MYConfiguration(Configuration):
     def __init__(self):
 
-        super(DPConfiguration, self).__init__()
+        super(MYConfiguration, self).__init__()
 
     def get_parser(self):
-        return DPParse
+        return MYParse
     pass

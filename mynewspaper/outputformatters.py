@@ -23,10 +23,10 @@ from newspaper.outputformatters import (
 log = logging.getLogger(__name__)
 
 
-class DPOutputFormatter(OutputFormatter):
+class MYOutputFormatter(OutputFormatter):
 
     def __init__(self, config):
-        super(DPOutputFormatter, self).__init__(config)
+        super(MYOutputFormatter, self).__init__(config)
 
     def convert_to_text(self):
         """

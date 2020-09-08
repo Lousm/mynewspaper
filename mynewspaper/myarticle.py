@@ -33,21 +33,21 @@ from newspaper.utils import (URLHelper, RawHelper, extend_config,
                         get_available_languages, extract_meta_refresh)
 from newspaper.videos.extractors import VideoExtractor
 
-from .dpextractors import (
-    DPContentExtractor
+from .myextractors import (
+    MYContentExtractor
 )
-from .dbconfiguration import (
-    DPConfiguration
+from .myconfiguration import (
+    MYConfiguration
 )
 from .outputformatters import (
-    DPOutputFormatter
+    MYOutputFormatter
 )
 from .tools import (
     getMd5,
     get_xpath
 )
 
-__title__ = "dparticle"
+__title__ = "myarticle"
 log = logging.getLogger(__name__)
 
 
@@ -55,13 +55,13 @@ class ArticleException(Exception):
     pass
 
 
-class DPArticle(Article):
+class MYArticle(Article):
     def __init__(self, url, title=u'',
                  source_url=u'', config=None, **kwargs):
-        self.config = config or DPConfiguration()
+        self.config = config or MYConfiguration()
         self.config = extend_config(self.config, kwargs)
 
-        self.extractor = DPContentExtractor(self.config)
+        self.extractor = MYContentExtractor(self.config)
 
         self.content_html = ""
         self.not_del_article_html=""
@@ -78,7 +78,7 @@ class DPArticle(Article):
         # all imgs
         self.all_imgs = []
 
-        super(DPArticle, self).__init__(
+        super(MYArticle, self).__init__(
             url, title=title, source_url=source_url, config=config, **kwargs
         )
 
@@ -456,7 +456,7 @@ class DPArticle(Article):
         parse_candidate = self.get_parse_candidate()
         self.link_hash = parse_candidate.link_hash  # MD5
 
-        output_formatter = DPOutputFormatter(self.config)
+        output_formatter = MYOutputFormatter(self.config)
         document_cleaner = DocumentCleaner(self.config)
         # output_formatter = OutputFormatter(self.config)
 
