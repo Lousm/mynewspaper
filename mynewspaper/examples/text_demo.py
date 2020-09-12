@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#-*- encoding: utf-8 -*-
+# -*- encoding: utf-8 -*-
 #
 # Copyright (c) 2020 LouShimin, Inc. All Rights Reserved
 #
@@ -50,14 +50,3 @@ news2 = Origin_Article(url, language="en")
 news2.set_html(html)
 news2.parse()
 print(news2.text)
-
-
-
-
-
-
-
-
-
-
-

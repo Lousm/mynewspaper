@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#-*- encoding: utf-8 -*-
+# -*- encoding: utf-8 -*-
 #
 # Copyright (c) 2020 LouShimin, Inc. All Rights Reserved
 #
@@ -30,7 +30,7 @@ from newspaper.cleaners import DocumentCleaner
 # from newspaper.extractors import ContentExtractor
 # from newspaper.outputformatters import OutputFormatter
 from newspaper.utils import (URLHelper, RawHelper, extend_config,
-                        get_available_languages, extract_meta_refresh)
+                             get_available_languages, extract_meta_refresh)
 from newspaper.videos.extractors import VideoExtractor
 
 from .myextractors import (
@@ -64,7 +64,7 @@ class MYArticle(Article):
         self.extractor = MYContentExtractor(self.config)
 
         self.content_html = ""
-        self.not_del_article_html=""
+        self.not_del_article_html = ""
 
         # add text with tag
         self.text_with_tag = ""
@@ -174,8 +174,6 @@ class MYArticle(Article):
             except Exception as message:
                 print(message)
 
-
-
     def get_all_valid_node(self, doc, node):
         """
         获取所有可用节点
@@ -193,9 +191,9 @@ class MYArticle(Article):
         if not values:
             return [node]
 
-        for k,v in values.items():
+        for k, v in values.items():
             tmp = "@{}=\'{}\'".format(
-                k,v
+                k, v
             )
             xpath.append(tmp)
 
@@ -207,18 +205,17 @@ class MYArticle(Article):
 
         nodes = doc.xpath(xpath_rule)
 
-
         return self.filter_invalid_nodes(nodes)
 
-    def get_not_del_all_valid_node(self,top_node,not_deldom):
+    def get_not_del_all_valid_node(self, top_node, not_deldom):
         """
         获取所有可用节点
         :param node:
         :return:
         """
-        xpath_list=[]
-        not_clean_html=""
-        top_xpath=""
+        xpath_list = []
+        not_clean_html = ""
+        top_xpath = ""
         xpath_end = top_node.tag
         xpath_attrib = top_node.attrib.get("class")
         if xpath_attrib is not None:
@@ -228,28 +225,27 @@ class MYArticle(Article):
         else:
             top_xpath = get_xpath(top_node, xpath_end)
 
-        best_node_list=not_deldom.xpath("//"+top_xpath)
-        if len(best_node_list)==0:
+        best_node_list = not_deldom.xpath("//" + top_xpath)
+        if len(best_node_list) == 0:
             return ""
         best_node_list = self.get_top_image(best_node_list)
-        best_node_list=self.not_del_filter_invalid_nodes(best_node_list)
-        del_nodes=[]
-        after_str=""
+        best_node_list = self.not_del_filter_invalid_nodes(best_node_list)
+        del_nodes = []
+        after_str = ""
         for simple in best_node_list:
-            html_str=etree.tostring(simple, method="html").decode()
+            html_str = etree.tostring(simple, method="html").decode()
             if html_str in after_str:
                 del_nodes.append(simple)
             else:
-                after_str=after_str+html_str
+                after_str = after_str + html_str
         for del_node in del_nodes:
             best_node_list.remove(del_node)
         for simple_node in best_node_list:
-            not_clean_html = not_clean_html +etree.tostring(simple_node, method="html").decode()
+            not_clean_html = not_clean_html + etree.tostring(simple_node, method="html").decode()
 
             # not_clean_html = etree.tostring(not_clean_dom, method="html").decode()
 
         return not_clean_html
-
 
     def filter_invalid_nodes(self, nodes, rewrite_links_tag=True):
         """
@@ -265,7 +261,8 @@ class MYArticle(Article):
         new_nodes = []
         for node in nodes:
             # del video tag 及其子节点
-            invalid_nodes = node.xpath(".//*[contains(@class, 'Video') or contains(@class, 'video') or contains(@id, 'page') or contains(@class, 'share') or contains(@class, 'follow-google') or contains(@class, 'cookies-warning') or contains(@class, 'Image_caption')]")
+            invalid_nodes = node.xpath(
+                ".//*[contains(@class, 'Video') or contains(@class, 'video') or contains(@id, 'page') or contains(@class, 'share') or contains(@class, 'follow-google') or contains(@class, 'cookies-warning') or contains(@class, 'Image_caption')]")
             for vn in invalid_nodes:
                 for d in vn.getchildren():
                     vn.remove(d)
@@ -288,9 +285,9 @@ class MYArticle(Article):
                         md_value = ""
                         # img src
                         attrib = dict(img.attrib)
-                        src=attrib.get('data-src')
-                        if src ==None:
-                            src=attrib.get('src')
+                        src = attrib.get('data-src')
+                        if src == None:
+                            src = attrib.get('src')
                         # src = (attrib.get('src') or
                         #        attrib.get('data-src')
                         # )
@@ -339,9 +336,6 @@ class MYArticle(Article):
             new_nodes.append(node)
         return new_nodes
 
-
-
-
     def not_del_filter_invalid_nodes(self, nodes, rewrite_links_tag=True):
         """
             TODO:
@@ -356,7 +350,8 @@ class MYArticle(Article):
         new_nodes = []
         for node in nodes:
             # del video tag 及其子节点
-            invalid_nodes = node.xpath(".//*[contains(@class, 'Video') or contains(@class, 'video') or contains(@id, 'page') or contains(@class, 'share') or contains(@class, 'follow-google') or contains(@class, 'cookies-warning') or contains(@class, 'Image_caption')]")
+            invalid_nodes = node.xpath(
+                ".//*[contains(@class, 'Video') or contains(@class, 'video') or contains(@id, 'page') or contains(@class, 'share') or contains(@class, 'follow-google') or contains(@class, 'cookies-warning') or contains(@class, 'Image_caption')]")
             for vn in invalid_nodes:
                 for d in vn.getchildren():
                     vn.remove(d)
@@ -367,7 +362,7 @@ class MYArticle(Article):
                 attrib = dict(img.attrib)
                 src = attrib.get('data-src')
                 if src == None:
-                    src=attrib.get('data-lazy-src')
+                    src = attrib.get('data-lazy-src')
                 if src == None:
                     src = attrib.get('src')
                 # src = (attrib.get('src') or
@@ -390,43 +385,43 @@ class MYArticle(Article):
             new_nodes.append(node)
         return new_nodes
 
-    def get_top_image(self,node):
+    def get_top_image(self, node):
         parent_dom = node[0].getparent()
-        i=0
-        img_node=None
+        i = 0
+        img_node = None
         try:
-            if parent_dom.getchildren().index(node[0])==0:
+            if parent_dom.getchildren().index(node[0]) == 0:
                 while True:
-                    if len(parent_dom.getparent().getchildren())==1:
-                        parent_dom=parent_dom.getparent()
+                    if len(parent_dom.getparent().getchildren()) == 1:
+                        parent_dom = parent_dom.getparent()
                         continue
-                    dom_index=parent_dom.getparent().getchildren().index(parent_dom)
-                    if dom_index==0:
+                    dom_index = parent_dom.getparent().getchildren().index(parent_dom)
+                    if dom_index == 0:
                         parent_dom = parent_dom.getparent()
                         continue
                     else:
                         break
             else:
 
-                dom_index=parent_dom.getchildren().index(node[0])
+                dom_index = parent_dom.getchildren().index(node[0])
                 parent_dom = node[0]
         except:
             return node
-        while i<2:
+        while i < 2:
             try:
-                if dom_index - i ==0:
+                if dom_index - i == 0:
                     break
                 up_dom = parent_dom.getparent().getchildren()[dom_index - i - 1]
                 # if up_dom.tag=="p" and up_dom.text=="":
                 #     continue
                 up_dom_text = up_dom.xpath(".//img")
-                if len(up_dom_text) !=0:
-                    img_node=up_dom_text[0].getparent()
+                if len(up_dom_text) != 0:
+                    img_node = up_dom_text[0].getparent()
                     # print(up_dom_text[0].attrib["src"])
                     break
-                i=i+1
+                i = i + 1
             except Exception as e:
-                img_node=None
+                img_node = None
                 break
         if img_node is None:
             return node
@@ -434,17 +429,12 @@ class MYArticle(Article):
             node.insert(0, img_node)
             return node
 
-
-
-
-
-
     def parse(self):
         self.throw_if_not_downloaded_verbose()
         re_comment = re.compile('<!--[^>]*-->')
         self.html = re_comment.sub('', self.html)
         self.doc = self.config.get_parser().fromstring(self.html)
-        self.not_del_doc=self.doc
+        self.not_del_doc = self.doc
         self.doc.make_links_absolute(self.url)
         self.clean_doc = copy.deepcopy(self.doc)
 
@@ -498,11 +488,8 @@ class MYArticle(Article):
             self.url,
             self.clean_doc)
 
-
-
-
         # Before any computations on the body, clean DOM object
-        not_deldom=copy.deepcopy(self.doc)
+        not_deldom = copy.deepcopy(self.doc)
         self.doc = document_cleaner.clean(self.doc)
         # str1=etree.tostring(self.doc,method="html")
         self.top_node = self.extractor.calculate_best_node(self.doc)
@@ -511,9 +498,9 @@ class MYArticle(Article):
             valid_nodes = self.get_all_valid_node(self.doc, self.top_node)
             # 获取原始页面的最优节点
             # not_del_html=self.get_not_del_xpath(valid_nodes,self.not_del_doc,check_str_list)
-            not_del_html=self.get_not_del_all_valid_node(self.top_node,not_deldom)
-            if not_del_html!="":
-                self.not_del_article_html=not_del_html
+            not_del_html = self.get_not_del_all_valid_node(self.top_node, not_deldom)
+            if not_del_html != "":
+                self.not_del_article_html = not_del_html
             # add text with tag
             self.set_text_with_tag(valid_nodes)
 
@@ -530,8 +517,8 @@ class MYArticle(Article):
                 self.top_node)
             self.set_article_html(article_html)
             self.set_text(text)
-            if not_del_html=="":
-                self.not_del_article_html=self.all_article_html
+            if not_del_html == "":
+                self.not_del_article_html = self.all_article_html
 
         self.fetch_images()
 

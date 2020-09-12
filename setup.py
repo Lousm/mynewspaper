@@ -15,7 +15,7 @@ def hilight(input_string):
         return input_string
     attr = []
     attr.append('31')  # red
-    attr.append('1')   # bold
+    attr.append('1')  # bold
     return '\x1b[%sm%s\x1b[0m' % (';'.join(attr), input_string)
 
 
@@ -24,20 +24,16 @@ try:
 except ImportError:
     from distutils.core import setup
 
-
 if sys.argv[-1] == 'publish':
     os.system('python setup.py sdist upload')  # bdist_wininst
     sys.exit()
-
 
 packages = [
     'mynewspaper',
 ]
 
-
 with open('requirements.txt') as f:
     required = f.read().splitlines()
-
 
 setup(
     name='mynewspaper',

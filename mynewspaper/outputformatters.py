@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#-*- encoding: utf-8 -*-
+# -*- encoding: utf-8 -*-
 #
 # Copyright (c) 2020 LouShimin, Inc. All Rights Reserved
 #
@@ -35,7 +35,7 @@ class MYOutputFormatter(OutputFormatter):
                 2、node.attrib 不为空，但是只有一个的node节点有此，则也为图片文字说明
         :return:
         """
-        has_img_attrib,has_attrib,filter_special_tag = [],[],[]
+        has_img_attrib, has_attrib, filter_special_tag = [], [], []
 
         for node in list(self.get_top_node()):
             try:
@@ -56,7 +56,7 @@ class MYOutputFormatter(OutputFormatter):
                     filter_special_tag.append(node)
                 elif 'figcaption' in node.tag.lower():  # 过滤些特殊的标签
                     filter_special_tag.append(node)
-                elif node.attrib:       # node.attrib == {}
+                elif node.attrib:  # node.attrib == {}
                     has_attrib.append(node)
             except Exception as err:
                 log.info('%s ignoring lxml node error: %s', __title__, err)
@@ -70,7 +70,7 @@ class MYOutputFormatter(OutputFormatter):
             if node in filter_special_tag:
                 continue
 
-            if (len(has_attrib) == 1 and    # 只有一张图片
+            if (len(has_attrib) == 1 and  # 只有一张图片
                     node in has_attrib):
                 continue
 

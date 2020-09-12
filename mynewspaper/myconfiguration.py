@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#-*- encoding: utf-8 -*-
+# -*- encoding: utf-8 -*-
 #
 # Copyright (c) 2020 LouShimin, Inc. All Rights Reserved
 #
@@ -19,9 +19,9 @@ from .myparsers import (
 
 class MYConfiguration(Configuration):
     def __init__(self):
-
         super(MYConfiguration, self).__init__()
 
     def get_parser(self):
         return MYParse
+
     pass

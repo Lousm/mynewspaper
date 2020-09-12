@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#-*- encoding: utf-8 -*-
+# -*- encoding: utf-8 -*-
 #
 # Copyright (c) 2020 LouShimin, Inc. All Rights Reserved
 #
@@ -28,7 +28,7 @@ class MYParse(Parser):
         article_cleaner.javascript = True
         article_cleaner.style = True
         article_cleaner.allow_tags = [
-            'span', 'p', 'br', 'strong', 'b','td',
+            'span', 'p', 'br', 'strong', 'b', 'td',
             'em', 'i', 'tt', 'code', 'pre', 'blockquote', 'img',
             'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
             'ul', 'ol', 'li', 'dl', 'dt', 'dd',
@@ -38,4 +38,5 @@ class MYParse(Parser):
         article_cleaner.remove_unknown_tags = False
         article_cleaner.safe_attrs = ['src']
         return article_cleaner.clean_html(node)
+
     pass

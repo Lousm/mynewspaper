@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#-*- encoding: utf-8 -*-
+# -*- encoding: utf-8 -*-
 #
 # Copyright (c) 2020 LouShimin, Inc. All Rights Reserved
 #
@@ -32,6 +32,11 @@ class MYContentExtractor(ContentExtractor):
         return cnt * 5
 
     def calculate_best_node(self, doc):
+        '''
+        计算最优节点
+        :param doc:
+        :return:
+        '''
         top_node = None
         nodes_to_check = self.nodes_to_check(doc)
         starting_boost = float(1.0)

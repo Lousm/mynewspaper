@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#-*- encoding: utf-8 -*-
+# -*- encoding: utf-8 -*-
 #
 # Copyright (c) 2020 LouShimin, Inc. All Rights Reserved
 #
@@ -35,5 +35,3 @@ news.set_html(html)
 news.parse()
 print(news.title)
 print(news.text)
-
-
