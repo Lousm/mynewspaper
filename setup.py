@@ -37,7 +37,7 @@ with open('requirements.txt') as f:
 
 setup(
     name='mynewspaper',
-    version='0.25.6',
+    version='0.25.7',
     description='Customized version from newspaper',
     author='loushimin',
     author_email='mr_lousm@163.com',
